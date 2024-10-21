@@ -1,26 +1,32 @@
-const loadPhone = async (searchText) => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
+const loadPhone = async (searchText, isShowAll) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText }`);
     const data = await res.json();
     const phones = data.data;
     // console.log(phones);
-    displayPhones(phones);
+    displayPhones(phones, isShowAll);
 }
 
-const displayPhones = phones => {
-
+const displayPhones = (phones, isShowAll) => {
+   
     // console.log(phones);
 
     // Show all Button added
     const showAllButton = document.getElementById('show-all-btn');
     showAllButton.classList.remove('hidden');
-    if (phones.length > 12) {
+    
+    
+    
+    if (phones.length > 12 && !isShowAll) {
         showAllButton.classList.remove('hidden');
     }
     else {
         showAllButton.classList.add('hidden');
     }
-    // Display only first 12 phones
-    phones = phones.slice(0, 12);
+    // Display only first 12 phones if not show All
+    
+    if(!isShowAll) {
+        phones = phones.slice(0, 12);
+    }
 
     // 1. Create Where to add
     const phoneContainer = document.getElementById('phone-container');
@@ -28,7 +34,7 @@ const displayPhones = phones => {
 
 
     phones.forEach(phone => {
-        console.log(phone)
+        // console.log(phone)
 
         //2. What will be added
         const phoneCard = document.createElement('div');
@@ -60,20 +66,21 @@ const displayPhones = phones => {
 
 // Handle Search 
 
-const handleSearch = () => {
+const handleSearch = (isShowAll) => {
     loadSpinner(true);
     const inputField = document.getElementById('input-field');
     const searchText = inputField.value;
-    loadPhone(searchText);
+    loadPhone(searchText, isShowAll);
 
 }
 
-const handleSearch2 = () => {
-    loadSpinner(true);
-    const inputField2 = document.getElementById('input-field2');
-    const searchText = inputField2.value;
-    loadPhone(searchText);
-}
+// Handle Search recap
+// const handleSearch2 = () => {
+//     loadSpinner(true);
+//     const inputField2 = document.getElementById('input-field2');
+//     const searchText = inputField2.value;
+//     loadPhone(searchText);
+// }
 
 // Load Spinner
 
@@ -86,4 +93,12 @@ const loadSpinner = (isLoading) => {
     else {
         loadingContainer.classList.add('hidden');
     }
+}
+
+
+// Handle Show All
+
+const handleShowAll = () => {
+    handleSearch(true);
+
 }
