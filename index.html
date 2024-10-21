@@ -38,7 +38,18 @@
 
         <!-- Search Result -->
         <section>
+            <!-- Loading Spinner -->
+            <div class="my-32 text-center hidden" id="loading-spinner">
+                <span class="loading loading-bars loading-lg text-primary"></span>
+                <span class="loading loading-bars loading-lg text-primary"></span>
+            </div>
+
             <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            </div>
+
+            <!-- Load all Button -->
+            <div id="show-all-btn" class="text-center hidden my-4">
+                <button class="btn btn-info text-gray-300 font-bold">Show More</button>
             </div>
         </section>
 

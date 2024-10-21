@@ -9,9 +9,23 @@ const loadPhone = async (searchText) => {
 const displayPhones = phones => {
 
     // console.log(phones);
+
+    // Show all Button added
+    const showAllButton = document.getElementById('show-all-btn');
+    showAllButton.classList.remove('hidden');
+    if (phones.length > 12) {
+        showAllButton.classList.remove('hidden');
+    }
+    else {
+        showAllButton.classList.add('hidden');
+    }
+    // Display only first 12 phones
+    phones = phones.slice(0, 12);
+
     // 1. Create Where to add
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.textContent = '';
+
 
     phones.forEach(phone => {
         console.log(phone)
@@ -36,7 +50,8 @@ const displayPhones = phones => {
 
         phoneContainer.appendChild(phoneCard);
 
-    })
+    });
+    loadSpinner(false);
 
 
 }
@@ -46,6 +61,7 @@ const displayPhones = phones => {
 // Handle Search 
 
 const handleSearch = () => {
+    loadSpinner(true);
     const inputField = document.getElementById('input-field');
     const searchText = inputField.value;
     loadPhone(searchText);
@@ -53,7 +69,21 @@ const handleSearch = () => {
 }
 
 const handleSearch2 = () => {
+    loadSpinner(true);
     const inputField2 = document.getElementById('input-field2');
     const searchText = inputField2.value;
     loadPhone(searchText);
+}
+
+// Load Spinner
+
+const loadSpinner = (isLoading) => {
+    const loadingContainer = document.getElementById('loading-spinner');
+
+    if (isLoading) {
+        loadingContainer.classList.remove('hidden');
+    }
+    else {
+        loadingContainer.classList.add('hidden');
+    }
 }
