@@ -73,21 +73,20 @@ const showPhoneDetails = (phone) => {
     console.log(phone);
     const phoneName = document.getElementById('phone-name');
     const modalDetailsContainer = document.getElementById('modal-details-container');
-    
+
     phoneName.innerText = `${phone.name}`;
-    
+
     modalDetailsContainer.innerHTML = `
-    <img  src= ${phone.image} alt="">
+    <div class=" flex justify-center">
+        <img src= ${phone.image} alt="">
+    </div>
     <p><b>Storage: </b><span>${phone?.mainFeatures?.storage}</span></p>
     <p><b>GPS: </b><span>${phone?.others?.GPS}</span></p>
     `
-    
+
     // Show the Modal
     show_details_modal.showModal();
 }
-
-
-loadPhone()
 
 // Handle Search 
 
